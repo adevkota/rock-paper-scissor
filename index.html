@@ -2,6 +2,9 @@
 <html>
    <head>
       <script>
+         var TIE_MESSAGE= "Tie";
+         var WIN_MESSAGE= "You Win";
+         var LOOSE_MESSAGE= "You Loose";
          function computerPlay() {
             var options = [
                'Rock',
@@ -18,15 +21,51 @@
                'scissor': 0
             }
 
-            let playerValue = val[playerSelection.toLowerCase()];
-            let computerValue = val[computerValue.toLowerCase()];
+            var playerValue = val[playerSelection.toLowerCase()];
+            var computerValue = val[computerValue.toLowerCase()];
 
             if (playerValue === computerValue) {
-               return "Tie";
+               return TIE_MESSAGE;
             }
 
-            return (playerValue + 1) % 3 === computerValue ? "You win": "You loose";
-         } 
+            return (playerValue + 1) % 3 === computerValue ? WIN_MESSAGE: LOOSE_MESSAGE;
+         }
+
+         function game() {
+            var count = {
+               player: 0,
+               computer: 0
+            }
+            for (var i = 0; i<5; i++) {
+               var result = playRound(prompt("Enter Rock, Paper or Scissor"), computerPlay());
+
+               switch(result){
+                  case TIE_MESSAGE:
+                     count.player++;
+                     count.computer++;
+                     break
+                  case WIN_MESSAGE: 
+                     count.player++;
+                     break;
+                  case LOOSE_MESSAGE:
+                     count.computer++;
+                     break;
+                  default:
+                     break;
+               }
+
+               console.log(`Round ${i}: ${result}` );
+            }
+            
+            if(count.player ===  count.computer) {
+               console.log("Game tied");
+            } else if(count.player >  count.computer) {
+               console.log("You won the game!")
+            } else {
+               console.log("You lost the game!")
+            }
+            
+         }
       </script>
    </head>
 </html>
