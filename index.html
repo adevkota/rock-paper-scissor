@@ -22,7 +22,7 @@
             }
 
             var playerValue = val[playerSelection.toLowerCase()];
-            var computerValue = val[computerValue.toLowerCase()];
+            var computerValue = val[computerSelection.toLowerCase()];
 
             if (playerValue === computerValue) {
                return TIE_MESSAGE;
@@ -31,13 +31,17 @@
             return (playerValue + 1) % 3 === computerValue ? WIN_MESSAGE: LOOSE_MESSAGE;
          }
 
-         function game() {
+         (function game() {
             var count = {
                player: 0,
                computer: 0
             }
             for (var i = 0; i<5; i++) {
-               var result = playRound(prompt("Enter Rock, Paper or Scissor"), computerPlay());
+               var playerSelection = prompt("Enter Rock, Paper or Scissor");
+               var computerSelection = computerPlay();
+               console.log(`Round ${1}:`);
+               console.log(`Player: ${playerSelection}, Computer: ${computerSelection}`);
+               var result = playRound(playerSelection, computerSelection);
 
                switch(result){
                   case TIE_MESSAGE:
@@ -54,7 +58,7 @@
                      break;
                }
 
-               console.log(`Round ${i}: ${result}` );
+               console.log(result);
             }
             
             if(count.player ===  count.computer) {
@@ -65,7 +69,7 @@
                console.log("You lost the game!")
             }
             
-         }
+         })();
       </script>
    </head>
 </html>
